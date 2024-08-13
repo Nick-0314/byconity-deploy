@@ -225,6 +225,22 @@ byconity:
     affinity: { }
     imagePullSecrets: [ ]
     securityContext: { }
+    livenessProbe:
+      exec:
+        command: [ "/opt/byconity/scripts/lifecycle/liveness" ]
+      failureThreshold: 6
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 20
+    readinessProbe:
+      exec:
+        command: [ "/opt/byconity/scripts/lifecycle/readiness" ]
+      failureThreshold: 5
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
     storage:
       localDisk:
         pvcSpec:
